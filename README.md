@@ -1,2 +1,2 @@
-# WT2
-The frontend application for the WT2 Assignment
+# WT2 - SD223AH - Frontend
+The frontend application for WT2.
