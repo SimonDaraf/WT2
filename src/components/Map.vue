@@ -972,14 +972,13 @@
   .map-container {
     width: 100%;
     height: auto;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
     aspect-ratio: 2000 / 857;
     object-fit: contain;
   }
 
   svg {
-    width: 100%;
     height: auto;
     max-width: 100%;
     max-height: 100%;
@@ -988,13 +987,13 @@
   }
 
   path {
-    fill: #a5a1d9;
-    stroke: #4d4a73;
+    fill: #202020;
+    stroke: #f3f3f3;
   }
 
   path:hover {
-    fill: #b7b4d9;
-    filter: drop-shadow(0px 0px 3px rgba(188,185,222,1));
-    stroke: #bcb9de;
+    fill: #f0f0f0;
+    filter: drop-shadow(0px 0px 3px rgba(230,230,230,1));
+    stroke: #ffffff;
   }
 </style>
