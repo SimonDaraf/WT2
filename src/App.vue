@@ -1,57 +1,63 @@
-<script setup>
-import WorldMap from './components/Map.vue'
-</script>
-
 <template>
-  <div class="container">
-    <div class="header">
-
-    </div>
-
-    <div class="content">
-      <WorldMap class="map-element"></WorldMap>
-    </div>
-
-    <div class="menu">
-
-    </div>
-
-    <div class="footer">
-
+  <div class="app">
+    <Sidebar />
+    <div class="body-container">
+      <router-view />
     </div>
   </div>
 </template>
 
-<style scoped>
-  .container {
-    height: 100%;
-    display: grid;
-    grid-template-areas:
-      "header header"
-      "menu content"
-      "footer footer";
-    grid-template-columns: 75px auto;
-    grid-template-rows: 75px auto 75px;
+<script setup>
+import Sidebar from './components/Sidebar.vue'
+</script>
+
+<style lang="scss">
+:root {
+  --primary: #7AE2CF;
+  --primary-alt: #077A7D;
+  --grey: #64748b;
+  --dark: #1e293b;
+  --dark-alt: #334155;
+  --light: #f1f5f9;
+  --sidebar-width: 300px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fira sans', sans-serif;
+}
+
+body {
+  background: var(--dark-alt);
+  color: var(--light);
+}
+
+button {
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.app {
+  display: flex;
+  main {
+    flex: 1 1 0;
+    padding: 2rem;
+
+    @media (max-width: 768px) {
+      padding-left: 6rem;
+    }
   }
 
-  .container > div.header {
-    grid-area: header;
+  .body-container {
+    background-color: var(--dark);
+    border-radius: 2rem;
+    margin: 1rem;
+    flex: 1 1 0;
   }
-
-  .container > div.content {
-    grid-area: content;
-    position: relative;
-    /* background: rgb(91,88,135);
-    background: linear-gradient(90deg, rgba(91,88,135,1) 0%, rgba(17,18,50,1) 100%); */
-    background-color: #181818;
-    border-radius: 20px 0 0 20px;
-  }
-
-  .container > div.menu {
-    grid-area: menu;
-  }
-
-  .container > div.footer {
-    grid-area: footer;
-  }
+}
 </style>
