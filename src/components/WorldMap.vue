@@ -158,8 +158,19 @@ M 564.4 347.9 564.3 347.8 564 347.1 564.2 347.1 564.4 347.9 Z M 574.9 347.4 574.
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onDeactivated, onMounted, ref} from 'vue'
 const map = ref(null)
+
+const abortController = new AbortController()
+const emit = defineEmits({
+  countrySelected: (name) => {
+    if (name) {
+      return true
+    } else {
+      return false
+    }
+  }
+})
 
 // When mounted and map ref has a value, add event emitter to all countries.
 onMounted(() => {
@@ -167,9 +178,15 @@ onMounted(() => {
   nestedPaths.forEach((path) => {
     const name = path.getAttribute('name')
     if (name) {
-      path.setAttribute('v-on:click', `$emit('countrySelected', '${name}')`)
+      path.addEventListener('click', () => {
+        emit('countrySelected', name)
+      }, { signal: abortController.signal })
     }
   })
+})
+
+onDeactivated(() => {
+  abortController.abort()
 })
 </script>
 
