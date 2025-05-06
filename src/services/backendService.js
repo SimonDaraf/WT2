@@ -14,7 +14,7 @@ export async function getYearRange() {
  * @param {undefined} [field=undefined] - Optional field to filter by.
  */
 export async function getByYear(year, field = undefined) {
-  return await fetchData(`/api/${year}${field ? `/field` : ''}`)
+  return await fetchData(`/api/${year}${field ? `/${field}` : ''}`)
 }
 
 export async function getTopByField(year, field) {
