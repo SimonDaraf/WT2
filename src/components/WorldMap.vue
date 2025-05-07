@@ -188,6 +188,8 @@ const emit = defineEmits({
 })
 
 const updateCountryVisuals = function (arr, sum, field, top) {
+  listingContainer.value.innerHTML = '' // Clear children
+
   for (const country of arr) {
     const countryElement = map.value.querySelector(`[name="${country.name}"]`)
 
