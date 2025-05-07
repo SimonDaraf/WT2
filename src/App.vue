@@ -2,7 +2,13 @@
   <div class="app">
     <Sidebar />
     <div class="body-container">
-      <router-view />
+      <Suspense>
+        <router-view />
+
+        <template #fallback>
+          Loading...
+        </template>
+      </Suspense>
     </div>
   </div>
 </template>
@@ -20,6 +26,9 @@ import Sidebar from './components/Sidebar.vue'
   --dark-alt: #334155;
   --light: #f1f5f9;
   --sidebar-width: 300px;
+  --no-data: #334155;
+  --min-color: #78232a;
+  --max-color: #81ba49;
 }
 
 * {
@@ -58,6 +67,7 @@ button {
     border-radius: 2rem;
     margin: 1rem;
     flex: 1 1 0;
+    overflow: hidden;
   }
 }
 </style>
