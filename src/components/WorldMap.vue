@@ -189,6 +189,12 @@ const emit = defineEmits({
 
 const updateCountryVisuals = function (arr, sum, field, top) {
   listingContainer.value.innerHTML = '' // Clear children
+  
+  // clear all child element colors
+  const paths = map.value.querySelectorAll('path')
+  for (const path of paths) {
+    path.style.fill = noDataColor
+  }
 
   for (const country of arr) {
     const countryElement = map.value.querySelector(`[name="${country.name}"]`)
