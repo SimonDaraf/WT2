@@ -1,6 +1,6 @@
 <script setup>
 import WorldMap from '../components/WorldMap.vue'
-import { getYearRange, getByYear, getSummaryOfField } from '../services/backendService.js';
+import { getYearRange, getByYear, getSummaryOfField, getTopByField } from '../services/backendService.js';
 import { onMounted, ref } from 'vue';
 import { Fields } from '../utils/fields.enum.js' 
 
@@ -24,10 +24,14 @@ if (!localStorage.getItem('selected')) {
 
 const reloadData = async () => {
   try {
+    localStorage.setItem('selected_year', current_selected_year.value)
+    localStorage.setItem('selected', selected.value)
+
     const res = await getByYear(current_selected_year.value, selected.value)
     const sum = await getSummaryOfField(current_selected_year.value, selected.value)
+    const top = await getTopByField(current_selected_year.value, selected.value)
 
-    worldMap.value.updateCountryVisuals(res, sum, selected.value)
+    worldMap.value.updateCountryVisuals(res, sum, selected.value, top)
   } catch (e) {
     alert(`Couldn't fetch data, ${e}`)
   }
@@ -54,6 +58,8 @@ const fetchData = async () => {
       current_selected_year.value = Number.parseInt(currentSelectedYear)
     }
     localStorage.setItem('selected_year', current_selected_year.value)
+
+    reloadData()
   } catch (e) {
     console.error('Failed fetching stats...', e)
   }
