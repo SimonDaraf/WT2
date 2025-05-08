@@ -2,9 +2,13 @@
   <div class="map">
     <aside>
       <h2>Top Countries</h2>
+      <h3>By {{ field }}</h3>
       <hr>
-      <div ref="listingContainer">
+      <div class="listing-container" ref="listingContainer">
       </div>
+      <hr>
+      <p class="desc">{{ description }}</p>
+      <a :href="sourceLink" class="source" target="_blank">{{ source }}</a>
     </aside>
     <div class="map-container">
       <svg ref="map" baseprofile="tiny" fill="#ececec" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width=".2" version="1.2" viewBox="0 0 2000 857" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -171,6 +175,11 @@ import CountryListing from './CountryListing.vue'
 const map = ref(null)
 const listingContainer = ref(null)
 
+const field = ref(null)
+const description = ref(null)
+const source = ref(null)
+const sourceLink = ref(null)
+
 const rootStyles = getComputedStyle(document.documentElement)
 const minColor = rootStyles.getPropertyValue('--min-color')
 const maxColor = rootStyles.getPropertyValue('--max-color')
@@ -187,8 +196,15 @@ const emit = defineEmits({
   }
 })
 
-const updateCountryVisuals = function (arr, sum, field, top) {
+const updateCountryVisuals = function (arr, sum, selectedField, top) {
   listingContainer.value.innerHTML = '' // Clear children
+
+  field.value = selectedField.value
+  description.value = selectedField.description
+  source.value = selectedField.source
+  sourceLink.value = selectedField.sourceLink
+
+  console.log(selectedField)
   
   // clear all child element colors
   const paths = map.value.querySelectorAll('path')
@@ -196,6 +212,7 @@ const updateCountryVisuals = function (arr, sum, field, top) {
     path.style.fill = noDataColor
   }
 
+  // Update colors
   for (const country of arr) {
     const countryElement = map.value.querySelector(`[name="${country.name}"]`)
 
@@ -204,8 +221,8 @@ const updateCountryVisuals = function (arr, sum, field, top) {
     }
 
     let color
-    if (country[field] || country[field] !== null) {
-      const t = (country[field] - sum.min) / (sum.max - sum.min) // Get normalized value.
+    if (country[selectedField.value] || country[selectedField.value] !== null) {
+      const t = (country[selectedField.value] - sum.min) / (sum.max - sum.min) // Get normalized value.
       color = lerpColor(minColor, maxColor, t)
     } else {
       color = noDataColor
@@ -214,6 +231,7 @@ const updateCountryVisuals = function (arr, sum, field, top) {
     countryElement.style.fill = color
   }
 
+  // Sidebar Data
   for (const country of top) {
     const element = document.querySelector(`[name="${country.name}"]`)
 
@@ -229,7 +247,7 @@ const updateCountryVisuals = function (arr, sum, field, top) {
 
     const listingElement = createApp(CountryListing, {
       country: country.name,
-      data: country[field],
+      data: selectedField.format(country[selectedField.value]),
       color
     })
 
@@ -274,15 +292,37 @@ defineExpose({ updateCountryVisuals })
       min-width: max-content;
       height: 100%;
       padding: 0 32px;
+      white-space: normal;
 
       h2 {
+        color: var(--light);
+      }
+
+      h3 {
+        font-size: medium;
         color: var(--grey);
+      }
+
+      .listing-container {
+        margin-bottom: 20px;
       }
 
       hr {
         margin-bottom: 20px;
         border: 0;
         border-top: 1px solid var(--grey);
+      }
+
+      .source {
+        font-size: .6rem;
+      }
+
+      .desc {
+        font-size: .8rem;
+        margin: auto;
+        text-align: center;
+        max-width: 200px;
+        color: var(--grey);
       }
     }
 

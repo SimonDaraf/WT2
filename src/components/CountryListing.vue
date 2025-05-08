@@ -11,7 +11,7 @@ const square = ref(null)
 
 const props = defineProps({
   country: String,
-  data: Number,
+  data: String,
   color: String
 })
 

@@ -1,7 +1,7 @@
 <script setup>
 import WorldMap from '../components/WorldMap.vue'
 import { getYearRange, getByYear, getSummaryOfField, getTopByField } from '../services/backendService.js';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, toRaw } from 'vue';
 import { Fields } from '../utils/fields.enum.js' 
 
 function onCountrySelected (name) {
@@ -17,7 +17,7 @@ const worldMap = ref(null)
 
 if (!localStorage.getItem('selected')) {
   selected.value = Fields.POPULATION.value
-  localStorage.setItem('selected', selected.value)
+  localStorage.setItem('selected', Fields.POPULATION.value)
 } else {
   selected.value = localStorage.getItem('selected')
 }
@@ -31,9 +31,9 @@ const reloadData = async () => {
     const sum = await getSummaryOfField(current_selected_year.value, selected.value)
     const top = await getTopByField(current_selected_year.value, selected.value)
 
-    worldMap.value.updateCountryVisuals(res, sum, selected.value, top)
+    worldMap.value.updateCountryVisuals(res, sum, Fields.fromValue(selected.value), top)
   } catch (e) {
-    alert(`Couldn't fetch data, ${e}`)
+    console.error(`Couldn't fetch data`)
   }
 }
 
