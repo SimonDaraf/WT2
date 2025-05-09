@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Map from '../views/Map.vue'
+import Chart from '../views/Chart.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -12,6 +13,10 @@ const router = createRouter({
     {
       path: '/map',
       component: Map
+    },
+    {
+      path: '/chart',
+      component: Chart
     }
   ]
 })

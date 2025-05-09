@@ -18,6 +18,10 @@
         <span class="material-icons">map</span>
         <span class="text">Map</span>
       </router-link>
+      <router-link class="button" to="/chart">
+        <span class="material-icons">show_chart</span>
+        <span class="text">Chart</span>
+      </router-link>
     </div>
   </aside>
 </template>

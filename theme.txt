@@ -1,1 +1,0 @@
-Used to declare themes. Might find a better solution later.
