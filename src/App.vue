@@ -41,6 +41,9 @@ import Sidebar from './components/Sidebar.vue'
 body {
   background: var(--dark-alt);
   color: var(--light);
+  overflow: hidden;
+  max-height: 100vh;
+  max-width: 100vw;
 }
 
 button {

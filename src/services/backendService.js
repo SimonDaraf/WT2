@@ -25,6 +25,10 @@ export async function getSummaryOfField(year, field) {
   return await fetchData(`/api/${year}/${field}/summary`)
 }
 
+export async function getAllByField(field, lowest_year, highest_year, countries) {
+  return await fetchData(`/api/${field}?lowest_year=${lowest_year}&highest_year=${highest_year}&countries=${JSON.stringify(countries)}`)
+}
+
 async function fetchData(url) {
   const res = await fetch(url, {
     method: 'GET'
