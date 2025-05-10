@@ -29,6 +29,10 @@ export async function getAllByField(field, lowest_year, highest_year, countries)
   return await fetchData(`/api/${field}?lowest_year=${lowest_year}&highest_year=${highest_year}&countries=${JSON.stringify(countries)}`)
 }
 
+export async function getAllCountries() {
+  return await fetchData('/api/countries')
+}
+
 async function fetchData(url) {
   const res = await fetch(url, {
     method: 'GET'
