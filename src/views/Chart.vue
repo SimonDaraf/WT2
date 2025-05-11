@@ -2,7 +2,6 @@
   <div class="stop-resize">
     <div class="container">
       <h1>Chart View</h1>
-
       <div class="chart-container">
         <canvas ref="chart" class="chart"></canvas>
         <div class="selector">
@@ -20,20 +19,28 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Chart from 'chart.js/auto'
-import { getAllByField, getAllCountries } from '../services/backendService.js'
+import { getAllByField, getAllCountries, getYearRange } from '../services/backendService.js'
 
 const chart = ref(null)
 const countries = ref(null)
 const checked = ref([])
 
+const lowestYear = ref(1900)
+const highestYear = ref(2023)
+const selectedHighestYear = ref(1920)
+const selectedLowestYear = ref(2020)
+
 onMounted(async () => {
   // Load a list of all countries
   countries.value = await getAllCountries()
 
+  // Set lowest and highest year
+  const yearRange = await getYearRange()
+  lowestYear.value = yearRange.lowest_year
+  highestYear.value = yearRange.highest_year
+
   const chartElement = chart.value
   const fetchedData = await getAllByField('population', 1930, 2023, ["Sweden", "Norway", "Russia"])
-
-  console.log(fetchedData)
 
   const datasets = []
 
