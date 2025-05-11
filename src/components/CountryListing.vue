@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { defineProps, onMounted, ref } from 'vue';
+import { defineProps, onMounted, ref } from 'vue'
 
 const square = ref(null)
 
