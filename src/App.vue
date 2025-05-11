@@ -29,6 +29,8 @@ import Sidebar from './components/Sidebar.vue'
   --no-data: #334155;
   --min-color: #78232a;
   --max-color: #81ba49;
+  --chart-color-min: #514173;
+  --chart-color-max: #00ff84;
 }
 
 * {
