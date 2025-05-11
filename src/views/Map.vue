@@ -1,7 +1,7 @@
 <script setup>
 import WorldMap from '../components/WorldMap.vue'
 import { getYearRange, getByYear, getSummaryOfField, getTopByField } from '../services/backendService.js';
-import { onMounted, ref, toRaw } from 'vue';
+import { onMounted, ref } from 'vue';
 import { Fields } from '../utils/fields.enum.js' 
 
 function onCountrySelected (name) {

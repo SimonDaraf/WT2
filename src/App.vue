@@ -33,6 +33,17 @@ import Sidebar from './components/Sidebar.vue'
   --chart-color-max: #00ff84;
 }
 
+.floating {
+  display: inline-block;
+  position: fixed;
+  height: fit-content;
+  width: fit-content;
+  pointer-events: none;  
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
 * {
   margin: 0;
   padding: 0;
