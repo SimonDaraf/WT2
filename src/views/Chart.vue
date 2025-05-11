@@ -210,6 +210,7 @@ onMounted(async () => {
         transition: opacity .2s;
         padding: 5px;
         border-radius: 10px;
+        color: var(--light);
       }
 
       .field-selector:hover {
@@ -221,6 +222,7 @@ onMounted(async () => {
         padding: 5px;
         border-radius: 10px;
         transition: 200ms;
+        color: var(--light);
       }
 
       div {

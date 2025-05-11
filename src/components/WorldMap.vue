@@ -258,6 +258,14 @@ onMounted(() => {
   nestedPaths.forEach((path) => {
     const name = path.getAttribute('name')
     if (name) {
+      path.addEventListener('mouseleave', () => {
+        // Remove previous element
+        if (currentTooltipRef.value && currentTooltipRef.value !== null) {
+          currentTooltipRef.value.remove()
+          currentTooltipRef.value = null
+        }
+      })
+
       path.addEventListener('mouseenter', (event) => {
         // Remove previous element
         if (currentTooltipRef.value && currentTooltipRef.value !== null) {
@@ -271,6 +279,8 @@ onMounted(() => {
 
         currentTooltipRef.value = document.createElement('div')
         currentTooltipRef.value.setAttribute('class', 'floating')
+        currentTooltipRef.value.style.left = `${event.clientX}px`
+        currentTooltipRef.value.style.top = `${event.clientY}px`
 
         mapContainer.value.appendChild(currentTooltipRef.value)
 

@@ -36,11 +36,9 @@ import Sidebar from './components/Sidebar.vue'
 .floating {
   display: inline-block;
   position: fixed;
-  height: fit-content;
-  width: fit-content;
-  pointer-events: none;  
-  top: 0;
-  left: 0;
+  height: min-content;
+  width: min-content;
+  pointer-events: none;
   z-index: 10000;
 }
 
