@@ -275,7 +275,11 @@ onMounted(() => {
 
         const color = event.target.style.fill
         const country = event.target.getAttribute('name')
-        const data = event.target.getAttribute('val')
+        let data = event.target.getAttribute('val')
+
+        if (!data || data === 'null') {
+          data = null // Easier to parse later.
+        }
 
         currentTooltipRef.value = document.createElement('div')
         currentTooltipRef.value.setAttribute('class', 'floating')
@@ -286,7 +290,7 @@ onMounted(() => {
 
         const tooltipElement = createApp(CountryTooltip, {
           country: country,
-          data: toRaw(fieldObj.value).format(data),
+          data: data !== null ? toRaw(fieldObj.value).format(data) : 'No data.',
           color
         })
 
