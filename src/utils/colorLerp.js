@@ -2,10 +2,11 @@
  * Lerps between color1 and color2 depending on the normalized value.
  *
  * @param {string} color1 - The first color value.
- * @param {string} color2 - The second color value. 
+ * @param {string} color2 - The second color value.
  * @param {number} t - The normalized value used to blend between the colors.
+ * @returns {string} - Returns the resulting color.
  */
-export function lerpColor(color1, color2, t) {
+export function lerpColor (color1, color2, t) {
   // Gotten using AI. I am no expert in bitwise operations.
   const c1 = parseInt(color1.slice(1), 16)
   const c2 = parseInt(color2.slice(1), 16)

@@ -1,39 +1,74 @@
 /**
  * Returns the lowest available year and highest available year.
  *
- * @return {object} - An object containing "highest_year" and "lowest_year".
+ * @returns {object} - An object containing "highest_year" and "lowest_year".
  */
-export async function getYearRange() {
+export async function getYearRange () {
   return await fetchData('/api/stats')
 }
 
 /**
  * Fetches data based on year.
  *
- * @param {number} year - The year. 
- * @param {undefined} [field=undefined] - Optional field to filter by.
+ * @param {number} year - The year.
+ * @param {string | undefined} [field=undefined] - Optional field to filter by.
+ * @returns {Promise<object[]>} - The resulting array of country data.
  */
-export async function getByYear(year, field = undefined) {
+export async function getByYear (year, field = undefined) {
   return await fetchData(`/api/${year}${field ? `/${field}` : ''}`)
 }
 
-export async function getTopByField(year, field) {
+/**
+ * Fetches data based on top result of given field.
+ *
+ * @param {number} year - The year.
+ * @param {string} field - The field.
+ * @returns {Promise<object[]>} - an array containing the top countries for any field.
+ */
+export async function getTopByField (year, field) {
   return await fetchData(`/api/${year}/${field}/top`)
 }
 
-export async function getSummaryOfField(year, field) {
+/**
+ * Returns the summary of a field with given year.
+ *
+ * @param {number} year - The year.
+ * @param {string} field - The field.
+ * @returns {Promise<object>} - The summary of a field with given year.
+ */
+export async function getSummaryOfField (year, field) {
   return await fetchData(`/api/${year}/${field}/summary`)
 }
 
-export async function getAllByField(field, lowest_year, highest_year, countries) {
-  return await fetchData(`/api/${field}?lowest_year=${lowest_year}&highest_year=${highest_year}&countries=${JSON.stringify(countries)}`)
+/**
+ * Retrieves all datapoints for specified country within given year span.
+ *
+ * @param {string} field - The given field.
+ * @param {number} lowestYear - The lowest year.
+ * @param {number} highestYear - The highest year.
+ * @param {string[]} countries - An array of countries to retrieve.
+ * @returns {Promise<object[]>} - an array containing all specified countries and relevant data points.
+ */
+export async function getAllByField (field, lowestYear, highestYear, countries) {
+  return await fetchData(`/api/${field}?lowest_year=${lowestYear}&highest_year=${highestYear}&countries=${JSON.stringify(countries)}`)
 }
 
-export async function getAllCountries() {
+/**
+ * Retrieves all available countries in api.
+ *
+ * @returns {Promise<object[]>} - All countries in api.
+ */
+export async function getAllCountries () {
   return await fetchData('/api/countries')
 }
 
-async function fetchData(url) {
+/**
+ * Internal method to retrieve data using fetch.
+ *
+ * @param {string} url - The specified url.
+ * @returns {Promise<*>} - The resulting request.
+ */
+async function fetchData (url) {
   const res = await fetch(url, {
     method: 'GET'
   })
