@@ -4,7 +4,7 @@
  * @returns {object} - An object containing "highest_year" and "lowest_year".
  */
 export async function getYearRange () {
-  return await fetchData('/api/stats')
+  return await fetchData('/geo-info/api/v1/data/stats')
 }
 
 /**
@@ -15,7 +15,7 @@ export async function getYearRange () {
  * @returns {Promise<object[]>} - The resulting array of country data.
  */
 export async function getByYear (year, field = undefined) {
-  return await fetchData(`/api/${year}${field ? `/${field}` : ''}`)
+  return await fetchData(`/geo-info/api/v1/data/${year}${field ? `/${field}` : ''}`)
 }
 
 /**
@@ -26,7 +26,7 @@ export async function getByYear (year, field = undefined) {
  * @returns {Promise<object[]>} - an array containing the top countries for any field.
  */
 export async function getTopByField (year, field) {
-  return await fetchData(`/api/${year}/${field}/top`)
+  return await fetchData(`/geo-info/api/v1/data/${year}/${field}/top`)
 }
 
 /**
@@ -37,7 +37,7 @@ export async function getTopByField (year, field) {
  * @returns {Promise<object>} - The summary of a field with given year.
  */
 export async function getSummaryOfField (year, field) {
-  return await fetchData(`/api/${year}/${field}/summary`)
+  return await fetchData(`/geo-info/api/v1/data/${year}/${field}/summary`)
 }
 
 /**
@@ -50,7 +50,7 @@ export async function getSummaryOfField (year, field) {
  * @returns {Promise<object[]>} - an array containing all specified countries and relevant data points.
  */
 export async function getAllByField (field, lowestYear, highestYear, countries) {
-  return await fetchData(`/api/${field}?lowest_year=${lowestYear}&highest_year=${highestYear}&countries=${JSON.stringify(countries)}`)
+  return await fetchData(`/geo-info/api/v1/data/${field}?lowest_year=${lowestYear}&highest_year=${highestYear}&countries=${JSON.stringify(countries)}`)
 }
 
 /**
@@ -59,7 +59,7 @@ export async function getAllByField (field, lowestYear, highestYear, countries) 
  * @returns {Promise<object[]>} - All countries in api.
  */
 export async function getAllCountries () {
-  return await fetchData('/api/countries')
+  return await fetchData('/geo-info/api/v1/data/countries')
 }
 
 /**

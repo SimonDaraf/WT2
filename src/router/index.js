@@ -4,7 +4,7 @@ import Map from '../views/Map.vue'
 import Chart from '../views/Chart.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/geo-info/'),
   routes: [
     {
       path: '/',
